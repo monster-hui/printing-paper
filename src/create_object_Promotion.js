@@ -1,5 +1,5 @@
 ﻿//优惠对象构造
-var Promotion=function(apec){
+var Promotion=function(spec){
 	var that={};
 	that.get_type=function(){
 		return spec.type;
@@ -7,7 +7,8 @@ var Promotion=function(apec){
 	that.get_barcodes=function(){
 		return spec.barcodes;
 		};
-	}
+	return that;
+}
 //实例化打折信息
 var myPromotion=[];
 myPromotion[0]=Promotion(
