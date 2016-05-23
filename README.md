@@ -5,3 +5,7 @@ src文件包含：
 	printing.js文件实现小票展示效果和功能
 	create_object_Commodity.js  //实现商品模型建立&实例化模型
         create_object_Promotion.js   //文件优惠信息模型建立&实例化模型
+test文件：
+	显示测试效果图。
+github库地址：
+	https://github.com/monster-hui/printing-paper
