@@ -28,7 +28,7 @@ var Commodity=function(spec){
 //实例化商品
 var myCommodity=[];
 myCommodity[0]=Commodity({ barcode: 'ITEM000000',name: '可口可乐',unit:'瓶',category: '食品',subCategory: '碳酸饮料',price: 3.00});
-myCommodity[1]=Commodity({ barcode: 'ITEM000001',name: '篮球',unit:'个',category: '运动用品',subCategory: '球类',price: 10.00});
+myCommodity[1]=Commodity({ barcode: 'ITEM000001',name: '篮球',unit:'个',category: '运动用品',subCategory: '球类',price: 95.00});
 myCommodity[2]=Commodity({ barcode: 'ITEM000002',name: '羽毛球',unit:'个',category: '运动用品',subCategory: '球类',price: 1.00});
 myCommodity[3]=Commodity({ barcode: 'ITEM000003',name: '苹果',unit:'斤',category: '食品',subCategory: '水果',price: 3.50});
 myCommodity[4]=Commodity({ barcode: 'ITEM000004',name: '雪碧',unit:'瓶',category: '食品',subCategory: '碳酸饮料',price: 3.00});
