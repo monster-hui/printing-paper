@@ -1,4 +1,4 @@
-
+﻿
 window.onload=function(){
     var data=['ITEM000001','ITEM000001','ITEM000001','ITEM000001','ITEM000001','ITEM000003-2','ITEM000005','ITEM000005','ITEM000005'];
 	var custumerBarcode=getCustumerBarcode(data);
@@ -59,6 +59,8 @@ function  isPromotion(barcode,promotion){
 //显示商品清单
 function  displayCommodity(array_Barcode){
 	var count=0.00;
+	var costdown=0;
+	var flag=false;
 	for(var i=0,length=array_Barcode[0].length;i<length;i++){		
 		var custumerCommodity=findCommodity(array_Barcode[0][i]);		
 		if(!custumerCommodity){
@@ -66,17 +68,38 @@ function  displayCommodity(array_Barcode){
 			contiune;
 			}
 		var oPin=createNode('list','li');
+		
 		var barcode=custumerCommodity.get_barcode();
 		var name=custumerCommodity.get_name();
 		var number=array_Barcode[1][i];
 		var _unit=custumerCommodity.get_unit();
 		var price=custumerCommodity.get_price();
-		var  add=number*price;		 
-		oPin.innerHTML='名称：'+name+'，数量：'+number+_unit+'，单价：'+price+'(元)，小计：'+add+'(元)';
-		count+=add;
+		var content1='名称：'+name+'，数量：'+number+_unit+'，单价：'+price+'(元)，小计：';
+		var add=number*price;	
+		var promotion=findPromotion('SINGLE_ITEM_BUY_HUNDRED_DISCOUNT_TEN');	
+		if(!!promotion&isPromotion(array_Barcode[0][i],promotion)){
+			 flag=true;
+			 var privilege=Math.floor(add/100)*10
+			 var oPin2=createNode('promotion','li');
+			 costdown+=privilege;
+			 oPin2.innerHTML=name+'，原价：'+add+'(元)，优惠：'+ privilege+'(元)';
+			 add-=privilege
+			 content1+=add+'(元)，优惠：'+privilege+'(元)';
+			}
+		else{
+			 content1+=add+'(元)';
+			}
+			 
+		oPin.innerHTML=content1;
+		count+=add;		
 	}
 	var oAdd=createNode('count','li');	
 	oAdd.innerHTML='总计：'+count+'(元)'
+	if(flag){
+		document.getElementById('promotion').style.display='block';
+		var oAdd=createNode('count','li');
+		oAdd.innerHTML='节省：'+costdown+'(元)';
+	}
 }
 //创建节点
 function  createNode(parentId,element){
