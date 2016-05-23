@@ -1,5 +1,4 @@
-﻿
-window.onload=function(){
+﻿window.onload=function(){
     var data=['ITEM000001','ITEM000001','ITEM000001','ITEM000001','ITEM000001','ITEM000003-2','ITEM000005','ITEM000005','ITEM000005'];
 	var custumerBarcode=getCustumerBarcode(data);
 	displayCommodity(custumerBarcode);
@@ -67,14 +66,13 @@ function  displayCommodity(array_Barcode){
 			alert(array_Barcode[i]+'不存在!');
 			contiune;
 			}
-		var oPin=createNode('list','li');
-		
+		var oPin=createNode('list','li');		
 		var barcode=custumerCommodity.get_barcode();
 		var name=custumerCommodity.get_name();
 		var number=array_Barcode[1][i];
 		var _unit=custumerCommodity.get_unit();
 		var price=custumerCommodity.get_price();
-		var content1='名称：'+name+'，数量：'+number+_unit+'，单价：'+price+'(元)，小计：';
+		var content1='名称：'+name+'，数量：'+number+_unit+'，单价：'+keep_two_decimals(price)+'(元)，小计：';
 		var add=number*price;	
 		var promotion=findPromotion('SINGLE_ITEM_BUY_HUNDRED_DISCOUNT_TEN');	
 		if(!!promotion&isPromotion(array_Barcode[0][i],promotion)){
@@ -82,19 +80,19 @@ function  displayCommodity(array_Barcode){
 			 var privilege=Math.floor(add/100)*10
 			 var oPin2=createNode('promotion','li');
 			 costdown+=privilege;
-			 oPin2.innerHTML=name+'，原价：'+add+'(元)，优惠：'+ privilege+'(元)';
+			 oPin2.innerHTML=name+'，原价：'+ keep_two_decimals(add)+'(元)，优惠：'+ keep_two_decimals(privilege) +'(元)';
 			 add-=privilege
-			 content1+=add+'(元)，优惠：'+privilege+'(元)';
+			 content1+=keep_two_decimals(add)+'(元)，优惠：'+keep_two_decimals(privilege)+'(元)';
 			}
 		else{
-			 content1+=add+'(元)';
+			 content1+=keep_two_decimals(add)+'(元)';
 			}
 			 
 		oPin.innerHTML=content1;
 		count+=add;		
 	}
 	var oAdd=createNode('count','li');	
-	oAdd.innerHTML='总计：'+count+'(元)'
+	oAdd.innerHTML='总计：'+keep_two_decimals(count)+'(元)'
 	if(flag){
 		document.getElementById('promotion').style.display='block';
 		var oAdd=createNode('count','li');
@@ -108,4 +106,16 @@ function  createNode(parentId,element){
 	oParent.appendChild(oPin); //添加商品
 	return oPin;
 }
-
+//实现保留两位小数
+function  keep_two_decimals(value){
+	var value=Math.round(parseFloat(value)*100)/100;
+	var xsd=value.toString().split(".");
+	if(xsd.length==1){
+		value=value.toString()+".00";
+		return value;
+	}
+	if(xsd.length>1){
+		if(xsd[1].length<2) value=value.toString()+"0";		
+	}
+	return value;
+}
