@@ -16,7 +16,7 @@ myPromotion[0]=Promotion(
      type: 'SINGLE_ITEM_BUY_HUNDRED_DISCOUNT_TEN',
      barcodes: [
        'ITEM000000',
- //      'ITEM000001'
+       'ITEM000001'
      ]
    }
 )
