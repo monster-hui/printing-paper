@@ -1,4 +1,5 @@
-﻿window.onload=function(){
+﻿//模拟接受的数据data
+window.onload=function(){
     var data=['ITEM000001','ITEM000001','ITEM000001','ITEM000001','ITEM000001','ITEM000003-2','ITEM000005','ITEM000005','ITEM000005'];
 	var custumerBarcode=getCustumerBarcode(data);
 	displayCommodity(custumerBarcode);
@@ -35,7 +36,6 @@ function  findCommodity(Barcode){
 	for(var i=0,length=myCommodity.length;i<length;i++){
 			if(Barcode==myCommodity[i].get_barcode())return myCommodity[i];
 	}
-
     return;
 }
 //获取满一百减十块优惠信息
@@ -57,9 +57,9 @@ function  isPromotion(barcode,promotion){
 
 //显示商品清单
 function  displayCommodity(array_Barcode){
-	var count=0.00;
-	var costdown=0;
-	var flag=false;
+	var count=0;//总金额
+	var costdown=0;//节省金额
+	var flag=false;//是否有优惠产品
 	for(var i=0,length=array_Barcode[0].length;i<length;i++){		
 		var custumerCommodity=findCommodity(array_Barcode[0][i]);		
 		if(!custumerCommodity){
